@@ -1,5 +1,6 @@
 import mc from 'merge-change';
 import StoreModule from '@src/services/store/module';
+import { ISessionState } from '@src/services/store/session/types';
 
 class SessionState extends StoreModule<{ tokenHeader: string }> {
   initState() {
@@ -25,7 +26,7 @@ class SessionState extends StoreModule<{ tokenHeader: string }> {
    * @param data Данные сессии
    * @param [description] Описание действия для логирования
    */
-  async set(data: any, description = 'Установка сессии') {
+  async set(data: ISessionState, description = 'Установка сессии') {
     this.updateState(mc.patch({ exists: true }, data), description);
     // Запоминание токена для восстановления сессии
     if (!import.meta.env.SSR) localStorage.setItem('token', data.token);

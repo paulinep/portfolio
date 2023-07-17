@@ -36,7 +36,7 @@ class StoreModule<Config> {
    * Конфигурация по умолчанию
    */
   defaultConfig() {
-    return {x: true};
+    return {};
   }
 
   /**

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import themes from '@src/utils/themes';
 
 import './style.less';
@@ -9,21 +8,11 @@ interface Props {
   children: React.ReactNode;
 }
 
-class LayoutContent extends Component<Props> {
-  static propTypes = {
-    children: PropTypes.node,
-    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  };
+function LayoutContent(props: Props) {
 
-  static defaultProps = {
-    theme: ['default'],
-  };
+  const { children, theme = [ 'default' ] } = props;
 
-  render() {
-    const { children, theme } = this.props;
-
-    return <div className={themes('LayoutContent', theme)}>{children}</div>;
-  }
+  return <div className={themes('LayoutContent', theme)}>{children}</div>;
 }
 
 export default LayoutContent;

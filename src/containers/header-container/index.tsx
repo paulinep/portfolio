@@ -7,9 +7,11 @@ import Logo from '@src/components/elements/logo';
 import { useLocation } from 'react-router-dom';
 import useSelector from '@src/utils/hooks/use-selector';
 import useServices from '@src/utils/hooks/use-services';
+import { TStoreState } from '@src/services/store/types';
+import { ISessionState } from '@src/services/store/session/types';
 
 function HeaderContainer() {
-  const select: any = useSelector((state: any) => ({
+  const select: {session: ReturnType<ISessionState>} = useSelector((state: TStoreState) => ({
     session: state.session,
   }));
 
@@ -45,7 +47,7 @@ function HeaderContainer() {
 
   const renders = {
     right: useMemo(() => {
-      let result = [];
+      const result = [];
       if (select.session.exists) {
         result.push(
           <Button key={1} theme={['clear-white', 'margins']} onClick={callbacks.onClickLogout}>
@@ -63,7 +65,7 @@ function HeaderContainer() {
     }, [select.session, callbacks.onClickLogout, callbacks.onClickLogin]),
   };
 
-  return <LayoutHeader left={<Logo />} right={renders.right} center={<MenuTop items={items} />} />;
+  return <LayoutHeader left={<Logo theme={'montspace'} />} right={renders.right} theme="montspace" center={<MenuTop items={items} />} />;
 }
 
 export default React.memo(HeaderContainer);

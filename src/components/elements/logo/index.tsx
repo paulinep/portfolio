@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import themes from '@src/utils/themes';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import themes from '@src/utils/themes'
 
-import './style.less';
+import './style.less'
 
 interface Props {
   to: string;
@@ -11,28 +11,15 @@ interface Props {
   theme?: string | string[];
 }
 
-class Logo extends Component<Props> {
-  static propTypes = {
-    to: PropTypes.string,
-    title: PropTypes.string,
-    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  };
+function Logo(props: Props) {
 
-  static defaultProps = {
-    to: '/',
-    title: '',
-    theme: '',
-  };
+  const { to = '/', title = '', theme = '' } = props
 
-  render() {
-    const { to, title } = this.props;
-
-    return (
-      <Link className={themes('Logo', this.props.theme)} to={to} title={title}>
-        Skeleton
-      </Link>
-    );
-  }
+  return (
+    <Link className={themes('Logo', theme)} to={to} title={title}>
+      Skeleton
+    </Link>
+  );
 }
 
-export default Logo;
+export default Logo

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import LayoutContent from '../layout-content';
 import themes from '@src/utils/themes';
 
@@ -13,34 +12,23 @@ interface Props {
   center: React.ReactNode;
 }
 
-class LayoutHeader extends Component<Props> {
-  static propTypes = {
-    children: PropTypes.node,
-    left: PropTypes.element,
-    right: PropTypes.any,
-    center: PropTypes.element,
-    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  };
+function LayoutHeader(props: Props) {
 
-  static defaultProps = {
-    theme: '',
-  };
+  const {theme = ''} = props;
 
-  render() {
-    const { left, children, right, center, theme } = this.props;
+  const { left, children, right, center} = props;
 
-    return (
-      <div className={themes('LayoutHeader', theme)}>
-        <LayoutContent>
-          <div className="LayoutHeader__wrap">
-            <div className="LayoutHeader__left">{left}</div>
-            <div className="LayoutHeader__center">{children || center}</div>
-            <div className="LayoutHeader__right">{right}</div>
-          </div>
-        </LayoutContent>
-      </div>
-    );
-  }
+  return (
+    <div className={themes('LayoutHeader', theme)}>
+      <LayoutContent theme={theme}>
+        <div className="LayoutHeader__wrap">
+          <div className="LayoutHeader__left">{left}</div>
+          <div className="LayoutHeader__center">{children || center}</div>
+          <div className="LayoutHeader__right">{right}</div>
+        </div>
+      </LayoutContent>
+    </div>
+  );
 }
 
 export default LayoutHeader;
