@@ -41,7 +41,7 @@ function HeaderContainer() {
     }, []),
 
     onClickLogout: useCallback(() => {
-      services.store.actions.session.clear();
+      services.store.modules.session.clear();
     }, []),
   };
 

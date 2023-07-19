@@ -5,7 +5,7 @@ import { ISessionState } from '@src/services/store/session/types';
 import {SessionStateConfig} from "@src/services/store/session/types";
 
 class SessionState extends StoreModule<SessionStateConfig> {
-  initState() {
+  defaultState() {
     return {
       user: {},
       token: null, // Опционально, если используется в http.js
