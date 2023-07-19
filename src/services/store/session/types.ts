@@ -4,3 +4,7 @@ export interface ISessionState {
   wait: boolean,
   exists: boolean,
 }
+export interface SessionStateConfig {
+  tokenHeader: string
+}
+
