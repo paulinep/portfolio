@@ -5,12 +5,10 @@ import PageLayout from "@src/components/layouts/page-layout";
 
 function About() {
   return (
-    <PageLayout>
-      <Head title="React Skeleton"></Head>
-      <Navigation/>
+    <>
       <h2>О проекте</h2>
       <p>Скелет приложения на React с примерами компонент и навигацией</p>
-    </PageLayout>
+    </>
   );
 }
 

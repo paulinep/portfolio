@@ -5,11 +5,9 @@ import PageLayout from "@src/components/layouts/page-layout";
 
 function Loading() {
   return (
-    <PageLayout>
-      <Head title="React Skeleton"></Head>
-      <Navigation/>
+    <>
       <p>Загрузка...</p>
-    </PageLayout>
+    </>
   );
 }
 

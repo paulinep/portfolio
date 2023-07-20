@@ -68,11 +68,7 @@ function ModalsExample(props: PropsModalsExample) {
   };
 
   return (
-    <PageLayout>
-      <Head title="React Skeleton">
-        {props.close && <button onClick={callbacks.onClose}>Закрыть</button>}
-      </Head>
-      <Navigation/>
+    <>
       <h2>Модальные окна</h2>
       <p>
         Модальные окна отображаются поверх текущей страницы, делая её элементы недоступными пока
@@ -107,7 +103,7 @@ function ModalsExample(props: PropsModalsExample) {
       <p>
         <button onClick={callbacks.openPage}>Открыть текущую страницу сервисом модалок</button>
       </p>
-    </PageLayout>
+    </>
   );
 }
 

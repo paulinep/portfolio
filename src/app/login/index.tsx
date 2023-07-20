@@ -25,9 +25,7 @@ function Login() {
   };
 
   return (
-    <PageLayout>
-      <Head title="React Skeleton"></Head>
-      <Navigation/>
+    <>
       <Fragment>
         <h2>Login page</h2>
         <FormLogin
@@ -38,7 +36,7 @@ function Login() {
           onSubmit={callbacks.onSubmitForm}
         />
       </Fragment>
-    </PageLayout>
+    </>
   );
 }
 

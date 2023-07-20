@@ -22,14 +22,12 @@ function Catalog() {
   }, [], {ssr: 'categories.load'});
 
   return (
-    <PageLayout>
-      <Head title="React Skeleton"></Head>
-      <Navigation/>
+    <>
       <h2>Каталог</h2>
       <CategoryTree/>
       <hr/>
       <ArticleList/>
-    </PageLayout>
+    </>
   );
 }
 

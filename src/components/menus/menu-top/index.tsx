@@ -33,7 +33,7 @@ export default function MenuTop (props: IMenuTop) {
       <ul className={'MenuTop__list'} >
         {items.map((item, index) => (
           <li key={index} onMouseEnter={handleHover(true)} onMouseLeave={handleHover(false)} className={cn('MenuTop__item ', { MenuTop__item_active: item.active })}>
-            <Link to={item.to} className="MenuTop__link">
+            <Link to={item.link} className="MenuTop__link">
               {item.title}
             </Link>
 

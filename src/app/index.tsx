@@ -5,6 +5,9 @@ import Modals from '@src/modals/container';
 import Loading from '@src/app/loading';
 import RequireAuth from '@src/containers/require-auth';
 import ModalsExample from "@src/app/modals-example";
+import Head from '@src/components/navigation/head';
+import Navigation from '@src/containers/navigation';
+import PageLayout from "@src/components/layouts/page-layout";
 
 // import Main from '@src/app/main';
 // import Login from '@src/app/login';
@@ -29,26 +32,31 @@ function App() {
         <title>Example</title>
         <meta name="description" content="React skeleton example" />
       </Helmet>
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" index element={<Main />} />
-          <Route path="/modals-example" index element={<ModalsExample />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/catalog/:categoryId" element={<Catalog />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/private/*"
-            element={
-              <RequireAuth redirect="/login">
-                <Private />
-              </RequireAuth>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-      <Modals />
+      <PageLayout>
+        <Head title="React Skeleton">
+          <Navigation/>
+        </Head>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" index element={<Main />} />
+            <Route path="/modals-example" index element={<ModalsExample />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/catalog/:categoryId" element={<Catalog />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/private/*"
+              element={
+                <RequireAuth redirect="/login">
+                  <Private />
+                </RequireAuth>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+        <Modals />
+      </PageLayout>
     </Fragment>
   );
 }
