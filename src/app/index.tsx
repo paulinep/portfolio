@@ -5,6 +5,8 @@ import Modals from '@src/services/modals/container';
 import Loading from '@src/app/loading';
 import Head from '@src/ui/navigation/head';
 import PageLayout from "@src/ui/layout/page-layout";
+import LocaleSelect from '@src/features/example-i18n/components/locale-select'
+import MenuTop from '@src/ui/menus/menu-top'
 
 
 // Синхронный импорт
@@ -17,10 +19,7 @@ import PageLayout from "@src/ui/layout/page-layout";
 const Main = lazy(() => import('@src/features/main/page'));
 const Login = lazy(() => import('@src/features/auth/pages/login'));
 const Catalog = lazy(() => import('@src/features/catalog/page'));
-const Profile = lazy(() => import('@src/features/auth/pages/profile'));
 const NotFound = lazy(() => import('@src/app/not-found'));
-const ExampleModals = lazy(() => import('@src/features/example-modals/page'));
-const ExampleI18n = lazy(() => import('@src/features/example-i18n/page'));
 
 function App() {
   return (
@@ -32,7 +31,8 @@ function App() {
       </Helmet>
       <PageLayout>
         <Head title="React Skeleton">
-          {/*<Navigation/>*/}
+          <MenuTop/>
+          <LocaleSelect/>
         </Head>
         <Suspense fallback={<Loading />}>
           <Routes>
