@@ -3,16 +3,15 @@ import StoreModule from '@src/services/store/module';
 import { InitListParamsStateType } from './types';
 
 /**
- * Модуль спика с параметрами и методами добавления, удаления, редактирования элемента в списке.
+ * Модуль списка с параметрами и методами добавления, удаления, редактирования элемента в списке.
  * Принцип работы: меняются параметры выборки (фильтры, сортировка...) -> меняется список.
  */
-class ListParamsState extends StoreModule<{ apiEndpoint: string }> {
+abstract class ListParamsState extends StoreModule<{ apiEndpoint: string }> {
   validator: any;
   //api: any;
 
   init() {
     this.validator = this.services.validator.make(this.schemaParams());
-    //this.api = this.services.api.get(this.config.apiEndpoint);
   }
 
   /**
@@ -80,7 +79,7 @@ class ListParamsState extends StoreModule<{ apiEndpoint: string }> {
     // В основе начальные параметры
     const defaultParams = this.defaultState().params;
     // Параметры из URL (query string)
-    const queryParams = this.validateParams(this.services.navigation.getSearchParams());
+    const queryParams = this.validateParams(this.services.router.getSearchParams());
     // Сливаем все параметры
     const newParams = mc.merge(defaultParams, queryParams, params);
     // Установка параметров и загрузка данных по ним
@@ -145,7 +144,7 @@ class ListParamsState extends StoreModule<{ apiEndpoint: string }> {
       }
       //  Сохранить параметры в location.search
       if (options.remember) {
-        this.services.navigation.setSearchParams(newParams, options.remember === 'push');
+        this.services.router.setSearchParams(newParams, options.remember === 'push');
       }
 
       // 2. ДАННЫЕ
@@ -210,7 +209,6 @@ class ListParamsState extends StoreModule<{ apiEndpoint: string }> {
     // const response = await this.api.findMany(apiParams);
     // // Установка полученных данных в состояние
     // return response.data.result;
-
     return {
       items: [],
       count: 0,

@@ -1,8 +1,8 @@
 import {memo} from "react";
 import {Link} from 'react-router-dom';
-import Head from "@src/components/navigation/head";
-import Navigation from "@src/containers/navigation";
-import PageLayout from "@src/components/layouts/page-layout";
+import Head from "@src/ui/navigation/head";
+import MainMenu from "@src/features/navigation/components/main-menu";
+import PageLayout from "@src/ui/layout/page-layout";
 
 function NotFound() {
   return (

@@ -1,8 +1,13 @@
-import React from 'react';
-import Head from "@src/components/navigation/head";
-import Navigation from "@src/containers/navigation";
-import PageLayout from "@src/components/layouts/page-layout";
+import {memo} from 'react';
+import Head from "@src/ui/navigation/head";
+import PageLayout from "@src/ui/layout/page-layout";
 
+/**
+ * Страница в режиме ожидания загрузки
+ * Не должна содержать контейнеры с асинхронной загрузкой (ожидания данных)
+ * При этом должна повторять разметку (относительное расположение постоянных элементов),
+ * чтобы вёрстка не прыгала
+ */
 function Loading() {
   return (
     <>
@@ -11,4 +16,4 @@ function Loading() {
   );
 }
 
-export default React.memo(Loading);
+export default memo(Loading);

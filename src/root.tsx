@@ -1,23 +1,23 @@
 import React from "react";
-import {HelmetProvider} from "react-helmet-async";
-import RouterProvider from '@src/containers/router-provider';
+import {HelmetProvider, HelmetServerState} from "react-helmet-async";
+import RouterProvider from '@src/services/router/provider';
 import Services from '@src/services';
 import App from '@src/app';
 import ServicesProvider from '@src/services/provider';
-import defaultConfig from '@src/config';
-import {TServicesConfig} from "@src/services/types";
+import clientConfig from '@src/config';
 
-export default async function root(config: TServicesConfig = {}) {
+export default async function root(envPartial: Partial<ImportMetaEnv> = {}): Promise<RootFabricResult> {
+  const env: ImportMetaEnv = {...import.meta.env, ...envPartial};
   // Инициализация менеджера сервисов
-  const servicesManager = new Services();
-  // Через services получаем доступ к store, api, navigation и всем другим сервисам
-  const services = await servicesManager.init([defaultConfig, config]);
+  const servicesManager = new Services(env);
+  // Через services получаем доступ к store, api, i18n и всем другим сервисам
+  const services = await servicesManager.init(clientConfig(env));
   // Контекст для метаданных html
   const head = {};
 
   const Root = () => (
     <ServicesProvider services={services}>
-      <RouterProvider navigation={services.navigation}>
+      <RouterProvider router={services.router}>
         <HelmetProvider context={head}>
           <App/>
         </HelmetProvider>
@@ -25,4 +25,12 @@ export default async function root(config: TServicesConfig = {}) {
     </ServicesProvider>
   );
   return {Root, servicesManager, head};
-}
+};
+
+export type RootFabricResult = {
+  Root: React.FunctionComponent,
+  servicesManager: Services,
+  head: {
+    hemlet?: HelmetServerState
+  }
+};
