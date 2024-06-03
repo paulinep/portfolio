@@ -1,12 +1,10 @@
 import React from 'react';
-import ArticleList from '@src/containers/article-list';
-import CategoryTree from '@src/containers/category-tree';
-import useInit from '@src/utils/hooks/use-init';
-import {useParams} from 'react-router-dom';
-import useServices from '@src/utils/hooks/use-services';
-import Head from "@src/components/navigation/head";
-import Navigation from "@src/containers/navigation";
-import PageLayout from "@src/components/layouts/page-layout";
+import ArticleList from '@src/features/catalog/containers/article-list';
+import CategoryTree from '@src/features/catalog/containers/category-tree';
+import useInit from '@src/services/use-init';
+import { useParams } from 'react-router-dom';
+import useServices from '@src/services/use-services';
+import PageLayout from "@src/ui/layout/page-layout";
 
 function Catalog() {
   const {categoryId} = useParams<{ categoryId: string }>();
@@ -23,8 +21,6 @@ function Catalog() {
 
   return (
     <PageLayout>
-      <Head title="React Skeleton"></Head>
-      <Navigation/>
       <h2>Каталог</h2>
       <CategoryTree/>
       <hr/>
