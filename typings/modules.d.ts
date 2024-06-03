@@ -7,10 +7,14 @@ declare module '*.html' {
 
 declare module 'merge-change' {
   interface MergeChange {
-    patch<A>(first: A,...values: (A | PartialRecursive<A>)[]): A;
-    merge<A>(first: A,...values: (A | PartialRecursive<A>)[]): A;
-    update<A>(first: A, ...values: (A | PartialRecursive<A>)[]): A;
+    // Патч первого объекта с его мутацией
+    patch<A>(first: A, ...values: Patch<A>[]): A;
+    // Создание нового объекта на основе первого слиянием в глубину остальных
+    merge<A>(first: A, ...values: Patch<A>[]): A;
+    // Иммутабельное слияние объектов. Если есть изменениям, то возвращается новый объект (иммутабельость на всю глубину слияния)
+    update<A>(first: A, ...values: Patch<A>[]): A;
   }
+
   const mc: MergeChange;
   export default mc;
 }

@@ -1,6 +1,6 @@
 import {memo} from 'react';
 import PageLayout from "@src/ui/layout/page-layout";
-import Head from "@src/ui/navigation/head";
+import Head from "@src/ui/layout/head";
 import MainMenu from "@src/features/navigation/components/main-menu";
 import LocaleSelect from "@src/features/example-i18n/components/locale-select";
 import useI18n from "@src/services/i18n/use-i18n";
@@ -9,15 +9,12 @@ function Main() {
   const {t} = useI18n();
   return (
     <PageLayout>
-      <h2>{t('main.page.title')}</h2>
+      <Head>
+        <h2>{t('main.page.title')}</h2>
+      </Head>
+      <MainMenu/>
+      <LocaleSelect/>
       <p>{t('main.page.content')}</p>
-      {/*<ul>*/}
-      {/*  <li>/app</li>*/}
-      {/*  <li>/features</li>*/}
-      {/*  <li>/services</li>*/}
-      {/*  <li>/ui - библиотека глупых компонент для разметки интерфейса. Часто дополняется сторонними библиотеками - Material Design, And Design или другими</li>*/}
-      {/*  <li>/utils</li>*/}
-      {/*</ul>*/}
     </PageLayout>
   );
 }

@@ -1,28 +1,37 @@
 import {memo} from 'react';
+import {useParams} from 'react-router-dom';
 import useI18n from "@src/services/i18n/use-i18n";
 import useInit from '@src/services/use-init';
-import {useParams} from 'react-router-dom';
 import useServices from '@src/services/use-services';
-import Head from "@src/ui/navigation/head";
+import useRefreshKey from "@src/services/router/use-refresh-key";
+import Head from "@src/ui/layout/head";
 import MainMenu from "@src/features/navigation/components/main-menu";
 import PageLayout from "@src/ui/layout/page-layout";
 import LocaleSelect from "@src/features/example-i18n/components/locale-select";
-import ArticleList from '@src/features/catalog/components/article-list';
-import CategoryTree from '@src/features/catalog/components/category-tree';
+import ArticleList from '@src/features/catalog/containers/article-list';
+import CategoryTree from '@src/features/catalog/containers/category-tree';
+import SideLayout from "@src/ui/layout/side-layout";
+import Sider from "@src/ui/layout/sider";
+import Content from "@src/ui/layout/content";
+import CatalogFilter from "@src/features/catalog/containers/catalog-filter";
 
 function CatalogPage() {
+  const {store} = useServices();
   const {locale, t} = useI18n();
   const {categoryId} = useParams<{ categoryId: string }>();
-  const services = useServices();
+
+  // Если при навигации через location.state передан признак refreshArticles=true,
+  // то получим новый ключ и сможем перезагрузить список
+  const refreshKey = useRefreshKey('refreshArticles');
 
   useInit(async () => {
-    // Инициализация параметров для начально выборки по ним
-    await services.store.modules.articles.initParams({filter: {category: categoryId}});
-  }, [categoryId, locale], {ssr: 'articles.init'});
+    // Инициализация параметров каталога
+    await store.modules.articles.initParams({category: categoryId});
+  }, [categoryId, locale, refreshKey], {ssr: 'articles.init'});
 
   useInit(async () => {
-    // await services.store.modules.categories.load({fields: '*', limit: 1000});
-    await services.store.modules.categories.load({fields: '*', limit: 1000});
+    // Загрузка списка категорий
+    await store.modules.categories.load({fields: '*', limit: 1000});
   }, [locale], {ssr: 'categories.load'});
 
   return (
@@ -30,9 +39,28 @@ function CatalogPage() {
       <Head title="React Skeleton"><LocaleSelect/></Head>
       <MainMenu/>
       <h2>{t('catalog.title')}</h2>
-      <CategoryTree/>
-      <hr/>
-      <ArticleList/>
+      <p>
+        Отображение отфильтрованного списка загруженного из АПИ.
+        Параметры списка: сортировка, пагинация, поиск - являются параметрами списка.
+        Параметры могут сохранятся в адресе страницы и восстанавливаться из адреса при открытии
+        страницы по прямой ссылке.
+      </p>
+      <p>
+        Все действия происходят над параметрами списка (фильтра) - их установка, сброс,
+        восстановление. Список элементов подгружается из АПИ с учётом установленных (текущих)
+        параметров.
+        Варианты значений для некоторых элементов фильтра загружаются отдельно.
+        Для них отдельное внешнее состояние.
+      </p>
+      <SideLayout side="between" align="top" wrap={false}>
+        <Sider>
+          <CategoryTree/>
+        </Sider>
+        <Content>
+          <CatalogFilter/>
+          <ArticleList/>
+        </Content>
+      </SideLayout>
     </PageLayout>
   );
 }

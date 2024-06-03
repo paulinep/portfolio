@@ -22,7 +22,7 @@ export type TStoreModules = {
  * Всё состояние от модулей Store
  */
 export type TStoreModulesState = {
-  [P in keyof TStoreModules]: ReturnType<TStoreModules[P]['getState']>
+  [P in TStoreModuleName as TStoreModuleKey<P>]: ReturnType<TStoreModules[P]['defaultState']>
 }
 
 /**
@@ -37,6 +37,6 @@ export type TStoreModulesConfig = {
  */
 export type TStoreConfig = {
   log?: boolean,
-  modules: PartialRecursive<TStoreModulesConfig>
+  modules: PartialDeep<TStoreModulesConfig>
 }
 

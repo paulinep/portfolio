@@ -3,11 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import Modals from '@src/services/modals/container';
 import Loading from '@src/app/loading';
-import Head from '@src/ui/navigation/head';
-import PageLayout from "@src/ui/layout/page-layout";
-import LocaleSelect from '@src/features/example-i18n/components/locale-select'
-import MenuTop from '@src/ui/menus/menu-top'
-
+import ExampleCanvasPage from "@src/features/example-canvas/page";
 
 // Синхронный импорт
 // import Main from '@src/features/main/page';
@@ -26,25 +22,20 @@ function App() {
     <>
       <Helmet>
         <html lang="en"/>
-        <title>Example</title>
+        <title>React Skeleton!</title>
         <meta name="description" content="React skeleton example"/>
       </Helmet>
-      <PageLayout>
-        <Head title="React Skeleton">
-          <MenuTop/>
-          <LocaleSelect/>
-        </Head>
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path="/" index element={<Main />} />
-            <Route path="/catalog" element={<Catalog />} />
-            <Route path="/catalog/:categoryId" element={<Catalog />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-        <Modals />
-      </PageLayout>
+      <Suspense fallback={<Loading/>}>
+        <Routes>
+          <Route path="/" index element={<Main/>}/>
+          <Route path="/example-canvas" index element={<ExampleCanvasPage/>}/>
+          <Route path="/catalog" element={<Catalog/>}/>
+          <Route path="/catalog/:categoryId" element={<Catalog/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="*" element={<NotFound/>} />
+        </Routes>
+      </Suspense>
+      <Modals/>
     </>
   );
 }

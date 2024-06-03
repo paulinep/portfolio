@@ -1,15 +1,13 @@
 {
-  "include": ["./typings", "./src", "./server", "./vite.config.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "include": ["typings/**/*", "src/**/*", "server/**/*", "vite.config.ts"],
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
       "@src": ["./src/index"],
       "@src/*": ["./src/*"],
     },
-
     "lib": ["dom", "esnext"],
-    "target": "ES6",
+    "target": "es2017",
     "jsx": "react-jsx",
     "module": "esnext",
     "moduleResolution": "node",
@@ -26,7 +24,8 @@
     "noImplicitThis": true
   },
   "files": [
-    "./typings/env.d.ts"
+    "./typings/env.d.ts",
+    "proxy.config.ts"
   ],
   "ts-node": {
     "esm": true,
