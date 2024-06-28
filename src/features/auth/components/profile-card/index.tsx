@@ -16,6 +16,7 @@ interface Props {
 
 function ProfileCard({data, t}: Props) {
   const cn = bem('ProfileCard');
+  console.log(data)
   return (
     <div className={cn()}>
       <h2>{t('auth.profile.title')}</h2>

@@ -1,0 +1,50 @@
+.Checkbox {
+  display: flex;
+
+  input[type=checkbox] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  label {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid black;
+  }
+
+  label input:checked ~ &-checkmark:after {
+    display: block;
+  }
+
+  &-checkmark:after {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-left: -1px;
+  }
+
+  input[type=checkbox]:checked ~ &-checkmark:after {
+    content: "\25A0";
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+    line-height: 13px;
+  }
+}

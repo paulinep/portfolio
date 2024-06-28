@@ -11,6 +11,7 @@ function AuthHead() {
   const location = useLocation();
   const store = useServices().store;
   const session = useStoreState('session');
+  console.log(session)
 
   const callbacks = {
     // Переход к авторизации

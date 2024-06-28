@@ -15,6 +15,7 @@ import ExampleCanvasPage from "@src/features/example-canvas/page";
 const Main = lazy(() => import('@src/features/main/page'));
 const Login = lazy(() => import('@src/features/auth/pages/login'));
 const Catalog = lazy(() => import('@src/features/catalog/page'));
+const Profile = lazy(() => import('@src/features/auth/pages/profile'));
 const NotFound = lazy(() => import('@src/app/not-found'));
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/example-canvas" index element={<ExampleCanvasPage/>}/>
           <Route path="/catalog" element={<Catalog/>}/>
           <Route path="/catalog/:categoryId" element={<Catalog/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="*" element={<NotFound/>} />
         </Routes>

@@ -5,7 +5,8 @@
     "title": "Sign In",
     "login": "Login",
     "password": "Password",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "rememberMe": "Remember me"
   },
   "profile": {
     "title": "Profile",

@@ -23,7 +23,9 @@ class ProfileState extends StoreModule<IProfileState> {
       data: null,
       waiting: true
     });
+
     const {data} = await this.services.api.endpoints.users.current({});
+    console.log(data)
     // Профиль загружен успешно
     this.setState({
       data: data.result,

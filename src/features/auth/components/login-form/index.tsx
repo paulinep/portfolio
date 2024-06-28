@@ -6,6 +6,7 @@ import Field from "@src/ui/elements/field";
 import Input from "@src/ui/elements/input";
 import {SignInBody} from "@src/features/auth/api/types";
 import useStoreState from "@src/services/store/use-store-state";
+import Checkbox from '@src/ui/elements/checkbox';
 
 function LoginForm() {
 
@@ -23,7 +24,7 @@ function LoginForm() {
 
   const callbacks = {
     // Колбэк на ввод в элементах формы
-    onChange: useCallback((value: string, name: string) => {
+    onChange: useCallback((value: string | boolean, name: string) => {
       setData(prevData => ({...prevData, [name]: value}));
     }, []),
 
@@ -45,12 +46,18 @@ function LoginForm() {
   return (
     <form onSubmit={callbacks.onSubmit}>
       <h2>{t('auth.loginForm.title')}</h2>
-      <Field label={t('auth.loginForm.login')} error={session.errors?.login}>
-        <Input name="login" value={data.login} onChange={callbacks.onChange}/>
+      <Field error={session.errors?.login}>
+        <Input name="login" placeholder={t('auth.loginForm.login')} value={data.login} size="big" onChange={callbacks.onChange}/>
       </Field>
-      <Field label={t('auth.loginForm.password')} error={session.errors?.password}>
-        <Input name="password" type="password" value={data.password} onChange={callbacks.onChange}/>
+      <Field error={session.errors?.password}>
+        <Input name="password" placeholder={t('auth.loginForm.password')} type="password" size="big" value={data.password} onChange={callbacks.onChange}/>
       </Field>
+      <Checkbox
+        name="remember"
+        value={data.remember}
+        label={t('auth.loginForm.rememberMe')}
+        onChange={callbacks.onChange}
+      />
       <Field error={session.errors?.other}/>
       <Field>
         <button type="submit">{t('auth.signIn')}</button>

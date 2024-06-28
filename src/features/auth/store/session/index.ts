@@ -33,6 +33,7 @@ class SessionState extends StoreModule<ISessionState, ISessionStateConfig> {
     this.setState(this.defaultState(), 'Авторизация');
     try {
       const res = await this.services.api.endpoints.users.signIn({data});
+      console.log(res);
       this.setState({
         ...this.getState(),
         token: res.data.result.token,

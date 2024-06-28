@@ -12,7 +12,7 @@ function Catalog() {
 
   useInit(async () => {
     // Инициализация параметров для начально выборки по ним
-    await services.store.modules.articles.initParams({filter: {category: categoryId}});
+    await services.store.modules.articles.initParams({category: categoryId});
   }, [categoryId], {ssr: 'articles.init'});
 
   useInit(async () => {

@@ -21,6 +21,7 @@ function ProfilePage() {
 
   const profile = useStoreState('profile');
   const t = useTranslate();
+  console.log(profile)
 
   return (
     <PageLayout>
